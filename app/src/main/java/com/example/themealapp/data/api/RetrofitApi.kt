@@ -14,11 +14,23 @@ interface RetrofitApi {
 
     @GET("lookup.php?")
     fun getMealDetails(
-        @Query("i") id : String) : Call<MealList>
+        @Query("i") id: String
+    ): Call<MealList>
+
+    @GET("filter.php?")
+    fun getPopularıtems(
+        @Query("c") categoryName: String
+    ): Call<CategoryPopularList>
+
+    @GET("categories.php")
+    fun getallCategories(): Call<CategoryList>
 
     @GET("filter.php")
-    fun getPopularıtems(
-        @Query("c") categoryName: String): Call<CategoryPopularList>
+    fun getMealsByCategory(@Query("c") categoryName: String): Call<CategoryPopularList>
 
+    @GET("search.php")
+    fun searchMeal(@Query(
+        "s") searchQuery: String
+    ): Call<MealList>
 
 }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardSearch"
-        android:layout_width="150dp"
-        android:layout_height="220dp"
-        android:layout_margin="15dp"
-        app:cardElevation="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        app:cardElevation="100dp"
         app:cardCornerRadius="20dp"
+        android:layout_marginBottom="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -21,30 +21,31 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/imageCategoryRow"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:id="@+id/image_country"
-                android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:src="@drawable/turkey"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/nice"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/text_country"
-                android:layout_width="match_parent"
+                android:id="@+id/textCategoryRow"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Turkey"
-                android:textSize="25dp"
-                android:gravity="center"
+                android:layout_marginStart="25dp"
+                android:text="Chickens"
                 android:textColor="@color/black"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_country"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintHorizontal_bias="0.151"
+                app:layout_constraintStart_toEndOf="@+id/imageCategoryRow"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

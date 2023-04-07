@@ -4,14 +4,19 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.themealapp.data.RoomDb.MealDataBase
 import com.example.themealapp.data.api.ApiService
 import com.example.themealapp.data.model.Meal
 import com.example.themealapp.data.model.MealList
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MealViewModel(): ViewModel() {
+class MealViewModel(
+    val mealDataBase: MealDataBase
+): ViewModel() {
 
     private var mealDetailLiveData = MutableLiveData<Meal>()
 
@@ -24,17 +29,20 @@ class MealViewModel(): ViewModel() {
                     return
                 }
             }
-
             override fun onFailure(call: Call<MealList>, t: Throwable) {
                 Log.d("MealActivity",t.message.toString())
             }
-
-
         })
     }
 
     fun observerMealDetailLiveData(): LiveData<Meal> {
         return mealDetailLiveData
+    }
+    fun insertMeal(meal: Meal) {
+
+     viewModelScope.launch {
+            mealDataBase.mealDao().upsert(meal)
+        }
     }
 
 

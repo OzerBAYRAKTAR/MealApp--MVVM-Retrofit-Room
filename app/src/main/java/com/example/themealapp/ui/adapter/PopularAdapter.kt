@@ -9,14 +9,15 @@ import com.example.themealapp.databinding.PopularRowBinding
 
 class PopularAdapter() : RecyclerView.Adapter<PopularAdapter.PopularCardholder>() {
     private var mealsList = ArrayList<CategoryPopularMeal>()
+    lateinit var onLongItemClicked: ((CategoryPopularMeal) -> Unit)
     lateinit var onItemClick: ((CategoryPopularMeal) -> Unit)
 
-    fun setMeals(mealsList: ArrayList<CategoryPopularMeal>) {
-        this.mealsList  = mealsList
+    fun setMeals(mealsList: List<CategoryPopularMeal>) {
+        this.mealsList  = mealsList as ArrayList<CategoryPopularMeal>
         notifyDataSetChanged()
     }
 
-    class PopularCardholder(val binding: PopularRowBinding): RecyclerView.ViewHolder(binding.root)
+    inner class PopularCardholder(val binding: PopularRowBinding): RecyclerView.ViewHolder(binding.root)
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularCardholder {
@@ -30,6 +31,11 @@ class PopularAdapter() : RecyclerView.Adapter<PopularAdapter.PopularCardholder>(
         holder.binding.textPopular.text = mealsList[position].strMeal
         holder.itemView.setOnClickListener {
             onItemClick.invoke(mealsList[position])
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongItemClicked.invoke(mealsList[position])
+            true
+
         }
     }
 

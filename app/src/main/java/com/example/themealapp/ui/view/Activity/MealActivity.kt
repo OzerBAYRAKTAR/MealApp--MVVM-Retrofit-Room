@@ -5,15 +5,16 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.themealapp.R
+import com.example.themealapp.data.RoomDb.MealDataBase
 import com.example.themealapp.data.model.Meal
 import com.example.themealapp.databinding.ActivityMealBinding
 import com.example.themealapp.ui.view.Fragment.MainFragment
-import com.example.themealapp.ui.viewmodel.MainFragmentViewModel
 import com.example.themealapp.ui.viewmodel.MealViewModel
+import com.example.themealapp.ui.viewmodel.MealViewModelFactory
 
 class MealActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMealBinding
@@ -22,6 +23,7 @@ class MealActivity : AppCompatActivity() {
     private lateinit var mealThumb : String
     private lateinit var youtubeLink: String
     private lateinit var viewModel : MealViewModel
+    private var mealToSave: Meal? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +31,27 @@ class MealActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        viewModel= ViewModelProvider(this).get(MealViewModel::class.java)
+        val mealDatabase = MealDataBase.getInstance(this)
+        val viewModelFactory = MealViewModelFactory(mealDatabase)
+        viewModel= ViewModelProvider(this,viewModelFactory)[MealViewModel::class.java]
 
         loadingCase()
         getMealInfoFromIntent()
         setInfoInMeals()
         viewModel.getMealDetail(mealId)
         observerMealDetailsLiveData()
+
         onYoutubeImageClicked()
+        onFavoriteImageClicked()
+    }
+
+    private fun onFavoriteImageClicked() {
+        binding.buttonAddToFavorites.setOnClickListener {
+            mealToSave?.let {
+                viewModel.insertMeal(it)
+                Toast.makeText(this, "Meal Saved", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onYoutubeImageClicked() {
@@ -51,10 +66,11 @@ class MealActivity : AppCompatActivity() {
 
             onResponseCase()
             val meal = value
+            mealToSave = meal
             binding.tvCategoryInfo.text = "Category: ${meal.strCategory}"
             binding.tvAreaInfo.text =  "Location: ${meal.strArea}"
             binding.tvContent.text = meal.strInstructions
-            youtubeLink = meal.strYoutube
+            youtubeLink = meal.strYoutube.toString()
         }
     }
 

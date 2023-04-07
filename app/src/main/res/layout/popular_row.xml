@@ -5,6 +5,7 @@
     android:layout_height="120dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
+    android:backgroundTint="#F3E5E1"
     android:elevation="5dp"
     app:cardUseCompatPadding="true">
     <androidx.constraintlayout.widget.ConstraintLayout
