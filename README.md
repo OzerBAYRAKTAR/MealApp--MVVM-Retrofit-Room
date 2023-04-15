@@ -1,7 +1,7 @@
 
 # The Meal Application 📱 🍝👨🏿‍🍳
 
-TheMeal app has more than 250 meal that you can find.This also helps to find wonderful recipes with all the ingredients to make it tasty.You can also save meals to your favorite's list.User can also filter out the type of food he wants according to his preferences. 🔍
+TheMeal app has more than 250 meal that you can find.This also helps to find wonderful recipes with all the ingredients to make it tasty.You can also save meals to your favorite's list.User can also filter out the type of food he wants according to his preferencess. 🔍
 
 
 ![11](https://user-images.githubusercontent.com/105236639/230591580-f19fcb68-317c-4525-bdec-acb53ef13589.png)
